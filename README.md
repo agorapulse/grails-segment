@@ -66,7 +66,7 @@ During testing/development, it is recommanded to flush every time a message is s
 ```groovy
 // Flush every time a message is submitted
 grails.plugin.segmentio.flushAfter = 1
-``
+```
 
 # Usage
 
