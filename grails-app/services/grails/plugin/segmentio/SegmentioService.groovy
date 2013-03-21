@@ -56,11 +56,11 @@ class SegmentioService implements InitializingBean {
      *            event's properties (such as the user's IP)s
      *
      */
-    void identify(String userId, Map traits = [:], DateTime timestamp = null, Map context = [:]) {
+    void identify(def userId, Map traits = [:], DateTime timestamp = null, Map context = [:]) {
         if (enabled) {
             // if (context.providers) context.providers = (context.providers as JSON).toString()
             Analytics.identify(
-                    userId,
+                    userId.toString(),
                     traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
                     timestamp,
                     context ? new Context(*context.collect { k, v -> [k, v] }.flatten()) : null
@@ -97,11 +97,11 @@ class SegmentioService implements InitializingBean {
      *            event's properties (such as the user's IP)
      *
      */
-    void track(String userId, String event, Map properties = [:], DateTime timestamp = null, Map context = [:]) {
+    void track(def userId, String event, Map properties = [:], DateTime timestamp = null, Map context = [:]) {
         if (enabled) {
             // if (context.providers) context.providers = (context.providers as JSON).toString()
             Analytics.track(
-                    userId,
+                    userId.toString(),
                     event,
                     properties ? new EventProperties(*properties.collect { k, v -> [k, v] }.flatten()) : null,
                     timestamp,
