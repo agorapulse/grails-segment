@@ -8,7 +8,7 @@ import spock.lang.Specification
 class SegmentioTagLibSpec extends Specification {
 
     def "should be disabled by default" () {
-        assert tagLib.enabled == false
+        !tagLib.enabled
     }
 
     def "should be disabled for PRODUCTION when no config is provided" () {
@@ -16,7 +16,7 @@ class SegmentioTagLibSpec extends Specification {
         setEnvironment(Environment.PRODUCTION)
 
         then:
-        assert tagLib.enabled == false
+        !tagLib.enabled
     }
 
     def "should be enabled for PRODUCTION by default"() {
@@ -25,7 +25,7 @@ class SegmentioTagLibSpec extends Specification {
         buildConfig(apiKey: 'apiKey')
 
         then:
-        assert tagLib.enabled == true
+        tagLib.enabled
     }
 
     def "should be disabled for NON-PRODUCTION by default" () {
@@ -34,7 +34,7 @@ class SegmentioTagLibSpec extends Specification {
         buildConfig(apiKey: 'apiKey')
 
         then:
-        assert tagLib.enabled == false
+        !tagLib.enabled
     }
 
     def "should be enabled when config enables SegmentIo" () {
@@ -42,7 +42,7 @@ class SegmentioTagLibSpec extends Specification {
         buildConfig(apiKey: 'apiKey', enabled: true)
 
         then:
-        assert tagLib.enabled == true
+       tagLib.enabled
     }
 
     def "should be disabled for PRODUCTION when config disables SegmentIo" () {
@@ -51,7 +51,7 @@ class SegmentioTagLibSpec extends Specification {
         buildConfig(apiKey: 'apiKey', enabled: false)
 
         then:
-        assert tagLib.enabled == false
+        !tagLib.enabled
     }
 
     // PRIVATE

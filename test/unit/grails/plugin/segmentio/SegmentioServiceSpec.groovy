@@ -8,7 +8,7 @@ import spock.lang.Specification
 class SegmentioServiceSpec extends Specification {
 
     def "should be disabled by default" () {
-        assert service.enabled == false
+        !service.enabled
     }
 
     def "should be disabled for PRODUCTION when no config is provided" () {
@@ -16,7 +16,7 @@ class SegmentioServiceSpec extends Specification {
         setEnvironment(Environment.PRODUCTION)
 
         then:
-        assert service.enabled == false
+        !service.enabled
     }
 
     def "should be enabled for PRODUCTION by default"() {
@@ -25,7 +25,7 @@ class SegmentioServiceSpec extends Specification {
         buildConfig(apiSecret: 'apiSecret')
 
         then:
-        assert service.enabled == true
+        service.enabled
     }
 
     def "should be disabled for NON-PRODUCTION by default" () {
@@ -34,7 +34,7 @@ class SegmentioServiceSpec extends Specification {
         buildConfig(apiSecret: 'apiSecret')
 
         then:
-        assert service.enabled == false
+        !service.enabled
     }
 
     def "should be enabled when config enables SegmentIo" () {
@@ -42,7 +42,7 @@ class SegmentioServiceSpec extends Specification {
         buildConfig(apiSecret: 'apiSecret', enabled: true)
 
         then:
-        assert service.enabled == true
+        service.enabled
     }
 
     def "should be disabled for PRODUCTION when config disables SegmentIo" () {
@@ -51,7 +51,7 @@ class SegmentioServiceSpec extends Specification {
         buildConfig(apiSecret: 'apiSecret', enabled: false)
 
         then:
-        assert service.enabled == false
+        !service.enabled
     }
 
     // PRIVATE
