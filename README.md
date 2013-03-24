@@ -7,6 +7,8 @@ Segment.io Grails Plugin
 
 The **Segment.io Plugin** allows you to integrate [Segment.io](http://segment.io) in your [Grails](http://grails.org) application.
 
+Segment.io lets you send your analytics data to any service you want, without you having to integrate with each one individually.
+
 It provides the following Grails artefacts:
 * **SegmentioService** - A server side service client to call [Segment.io APIs](https://segment.io/api/rest).
 * **SegmentioTagLib** - A collection of tags to use [Segment.io Analytics.js Library](https://segment.io/libraries/analytics.js) in your GSPs.
@@ -28,7 +30,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.1.4'
+				runtime ':segmentio:0.1.7'
 		}
 }
 ```
@@ -80,8 +82,11 @@ def segmentioService
 // Identify and set traits
 segmentioService.identify('bob@bob.com', [gender: 'male'])
 
-// Identify and set traits with date (JodaTime DateTime representing when the identify took place)
+// Identify and set traits with past date (JodaTime DateTime representing when the identify took place)
 segmentioService.identify('bob@bob.com', [gender: 'male'], new DateTime(2012, 3, 26, 12, 0, 0, 0))
+
+// Identify and set traits with past date and context
+segmentioService.identify('bob@bob.com', [gender: 'male'], new DateTime(2012, 3, 26, 12, 0, 0, 0), [providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true], ip: '192.168.0.10'])
 
 // Track an event
 segmentioService.track('bob@bob.com', 'Signed up')
@@ -89,8 +94,11 @@ segmentioService.track('bob@bob.com', 'Signed up')
 // Track an event and set properties
 segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95])
 
-// Track a past event and set properties
+// Track a past event and set properties with past date
 segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95], new DateTime(2012, 3, 26, 12, 0, 0, 0))
+
+// Track a past event and set properties with past date and context
+segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95], new DateTime(2012, 3, 26, 12, 0, 0, 0), [providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true], ip: '192.168.0.10'])
 ```
 
 ## SegmentioTagLib
@@ -147,7 +155,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
-* 2013-03-18 **V0.1.4** : initial release
+* 2013-03-25 **V0.1.7** : initial release
 
 # Bugs
 
