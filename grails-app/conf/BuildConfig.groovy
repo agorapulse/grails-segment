@@ -10,7 +10,8 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile 'com.github.segmentio:analytics:0.1.4'
+        compile 'com.github.segmentio:analytics:0.1.7'
+        compile 'joda-time:joda-time:2.1'
         test 'org.spockframework:spock-grails-support:0.7-groovy-2.0'
     }
     plugins {
