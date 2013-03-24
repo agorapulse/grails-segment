@@ -83,22 +83,58 @@ def segmentioService
 segmentioService.identify('bob@bob.com', [gender: 'male'])
 
 // Identify and set traits with past date (JodaTime DateTime representing when the identify took place)
-segmentioService.identify('bob@bob.com', [gender: 'male'], new DateTime(2012, 3, 26, 12, 0, 0, 0))
+segmentioService.identify(
+    'bob@bob.com',
+    [gender: 'male'],
+    new DateTime(2012, 3, 26, 12, 0, 0, 0)
+)
 
 // Identify and set traits with past date and context
-segmentioService.identify('bob@bob.com', [gender: 'male'], new DateTime(2012, 3, 26, 12, 0, 0, 0), [providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true], ip: '192.168.0.10'])
+segmentioService.identify(
+    'bob@bob.com', [gender: 'male'],
+    new DateTime(2012, 3, 26, 12, 0, 0, 0),
+    [
+        providers: [
+            'All': false,
+            'Mixpanel': true,
+            'KISSmetrics': true
+        ],
+        ip: '192.168.0.10'
+    ]
+)
 
 // Track an event
 segmentioService.track('bob@bob.com', 'Signed up')
 
 // Track an event and set properties
-segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95])
+segmentioService.track(
+    'bob@bob.com',
+    'Signed up',
+    [plan: 'Pro', amount: 99.95]
+)
 
 // Track a past event and set properties with past date
-segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95], new DateTime(2012, 3, 26, 12, 0, 0, 0))
+segmentioService.track(
+    'bob@bob.com', 'Signed up',
+    [plan: 'Pro', amount: 99.95],
+    new DateTime(2012, 3, 26, 12, 0, 0, 0)
+)
 
 // Track a past event and set properties with past date and context
-segmentioService.track('bob@bob.com', 'Signed up', [plan: 'Pro', amount: 99.95], new DateTime(2012, 3, 26, 12, 0, 0, 0), [providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true], ip: '192.168.0.10'])
+segmentioService.track(
+    'bob@bob.com',
+    'Signed up',
+    [plan: 'Pro', amount: 99.95],
+    new DateTime(2012, 3, 26, 12, 0, 0, 0),
+    [
+        providers: [
+            'All': false,
+            'Mixpanel': true,
+            'KISSmetrics': true
+        ],
+        ip: '192.168.0.10'
+    ]
+)
 ```
 
 ## SegmentioTagLib
@@ -126,7 +162,9 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
 <segmentio:identify userId="bob@bob.com" traits="${[gender: 'male']}"/>
 
 <!-- Identify current user with context -->
-<segmentio:identify userId="bob@bob.com" context="${[providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
+<segmentio:identify
+    userId="bob@bob.com"
+    context="${[providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
 
 <!-- Track an event -->
 <segmentio:track event="Signed Up"/>
@@ -135,13 +173,21 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
 <segmentio:track event="Signed Up" properties="${[plan: 'Pro', revenue: 99.95]}"/>
 
 <!-- Track an event with context -->
-<segmentio:track event="Signed Up" context="${[providers: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
+<segmentio:track
+    event="Signed Up"
+    context="${[providers: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
 
 <!-- Track a link click -->
-<segmentio:trackLink link="\$('a.signup-link')" event="Signed Up" properties="${[plan: 'Pro', revenue: 99.95]}"/>
+<segmentio:trackLink
+    event="Signed Up"
+    link="\$('a.signup-link')"
+    properties="${[plan: 'Pro', revenue: 99.95]}"/>
 
 <!-- Track a form submission -->
-<segmentio:trackForm form="\$('form.signup-form')" event="Signed Up" properties="${[plan: 'Pro', revenue: 99.95]}"/>
+<segmentio:trackForm
+    event="Signed Up"
+    form="\$('form.signup-form')"
+    properties="${[plan: 'Pro', revenue: 99.95]}"/>
 
 <!-- Page view -->
 <segmentio:pageview url="http://mydomain.com/somepath"/>
