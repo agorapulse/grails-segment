@@ -1,12 +1,12 @@
 class SegmentioGrailsPlugin {
     
-    def version = "0.1.4-SNAPSHOT"
+    def version = "0.1.7"
     def grailsVersion = "2.0 > *"
 
     def author = "Benoit Hediard"
     def authorEmail = "ben@benorama.com"
     def title = "Segment.io Plugin"
-    def description = "The Segment.io Plugin allows your Grails application to use Segment.io APIs."
+    def description = "The Segment.io Plugin allows your Grails application to use Segment.io. Segment.io lets you send your analytics data to any service you want, without you having to integrate with each one individually."
 
     def documentation = "https://github.com/benorama/grails-segmentio"
     def license = "APACHE"
