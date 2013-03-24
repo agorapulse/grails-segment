@@ -4,6 +4,7 @@ import com.github.segmentio.Analytics
 import com.github.segmentio.Options
 import com.github.segmentio.models.Context
 import com.github.segmentio.models.EventProperties
+import com.github.segmentio.models.Providers
 import com.github.segmentio.models.Traits
 import grails.util.Environment
 import org.joda.time.DateTime
@@ -17,6 +18,7 @@ class SegmentioService implements InitializingBean {
         if (!enabled) {
             log.info "Segment.io is not enabled"
         } else {
+            log.debug "Initializing Segment.io service"
             Options options = new Options()
             if (config.flushAfter) options.flushAfter = config.flushAfter // default to 20 (every 20 messages)
             if (config.flushAt) options.flushAt = config.flushAt // default to 10000 (if 10 seconds has passed since the last flush)
@@ -57,12 +59,12 @@ class SegmentioService implements InitializingBean {
      */
     void identify(def userId, Map traits = [:], DateTime timestamp = null, Map context = [:]) {
         if (enabled) {
-            // if (context.providers) context.providers = (context.providers as JSON).toString()
+            log.debug "Identifying userId=$userId traits=$traits timestamp=$timestamp context=$context"
             Analytics.identify(
                     userId.toString(),
                     traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
                     timestamp,
-                    context ? new Context(*context.collect { k, v -> [k, v] }.flatten()) : null
+                    buildContext(context)
             )
         }
     }
@@ -98,18 +100,42 @@ class SegmentioService implements InitializingBean {
      */
     void track(def userId, String event, Map properties = [:], DateTime timestamp = null, Map context = [:]) {
         if (enabled) {
+            log.debug "Tracking userId=$userId event=$event properties=$properties timestamp=$timestamp context=$context"
             // if (context.providers) context.providers = (context.providers as JSON).toString()
             Analytics.track(
                     userId.toString(),
                     event,
                     properties ? new EventProperties(*properties.collect { k, v -> [k, v] }.flatten()) : null,
                     timestamp,
-                    context ? new Context(*context.collect { k, v -> [k, v] }.flatten()) : null
+                    buildContext(context)
             )
         }
     }
 
     // PRIVATE
+
+    private Context buildContext(Map context) {
+        if (context) {
+            Context sioContext = new Context(*context.collect { k, v -> [k, v] }.flatten())
+            if (context.ip) {
+                sioContext.ip = context.ip
+            }
+            if (context.providers) {
+                Providers providers = new Providers()
+                context.providers.each { String providerName, boolean enabled ->
+                    if (providerName == 'all') {
+                        providers.setDefault(enabled)
+                    } else {
+                        providers.setEnabled(providerName, enabled)
+                    }
+                }
+                sioContext.setProviders(providers)
+            }
+            return sioContext
+        } else {
+            return null
+        }
+    }
 
     private def getConfig() {
         grailsApplication.config.grails?.plugin?.segmentio
