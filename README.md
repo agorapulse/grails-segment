@@ -30,7 +30,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.1.7'
+				runtime ':segmentio:0.2.0'
 		}
 }
 ```
@@ -193,7 +193,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
-* 2013-05-11 **V0.2.0** : updated to segmentio 0.2.0
+* 2013-05-11 **V0.2.0** : updated to segmentio 0.2.0 (thanks to pull request by tuler)
 * 2013-03-25 **V0.1.7** : initial release
 
 # Bugs
