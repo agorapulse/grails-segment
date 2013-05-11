@@ -20,8 +20,6 @@ class SegmentioService implements InitializingBean {
         } else {
             log.debug "Initializing Segment.io service"
             Options options = new Options()
-            if (config.flushAfter) options.flushAfter = config.flushAfter // default to 20 (every 20 messages)
-            if (config.flushAt) options.flushAt = config.flushAt // default to 10000 (if 10 seconds has passed since the last flush)
             if (config.maxQueueSize) options.maxQueueSize = config.maxQueueSize // default to 10000 (10 000 messages)
             Analytics.initialize(config.apiSecret, options)
         }

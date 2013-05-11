@@ -55,19 +55,8 @@ grails.plugin.segmentio.enabled = true
 Server side client uses the default following config:
 
 ```groovy
-// Flush every 20 messages
-grails.plugin.segmentio.flushAfter = 20
-// Flush if 10 seconds has passed since the last flush
-grails.plugin.segmentio.flushAt = 10000
 // Queue size limit
 grails.plugin.segmentio.maxQueueSize = 10000
-```
-
-During testing/development, it is recommanded to flush every time a message is submitted.
-
-```groovy
-// Flush every time a message is submitted
-grails.plugin.segmentio.flushAfter = 1
 ```
 
 # Usage
@@ -161,6 +150,9 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
 <!-- Identify current user and set traits -->
 <segmentio:identify userId="bob@bob.com" traits="${[gender: 'male']}"/>
 
+<!-- Identify a group and set traits -->
+<segmentio:group groupId="power_users" traits="${[plan: 'silver']}"/>
+
 <!-- Identify current user with context -->
 <segmentio:identify
     userId="bob@bob.com"
@@ -201,6 +193,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2013-05-11 **V0.2.0** : updated to segmentio 0.2.0
 * 2013-03-25 **V0.1.7** : initial release
 
 # Bugs

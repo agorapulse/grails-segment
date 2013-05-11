@@ -45,6 +45,18 @@ class SegmentioTagLib {
     }
 
     /**
+     * Group
+     *
+     * @attr groupId REQUIRED The ID you refer to the group by in your database.
+     * @attr traits A map of traits you know about the group. Things like: name, subscriptionPlan, etc.
+     */
+    def group = { attrs ->
+        if (enabled) {
+            out << render(template: '/tags/group', model: attrs, plugin: 'segmentio')
+        }
+    }
+
+    /**
      * Page view
      *
      * @attr url The URL of the current page you're tracking. By default, services will use the current URL. If your app doesn't update the URL automatically, you'll want to pass it in here.
