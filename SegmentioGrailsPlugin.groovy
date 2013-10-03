@@ -1,6 +1,6 @@
 class SegmentioGrailsPlugin {
     
-    def version = "0.2.0"
+    def version = "0.3.1"
     def grailsVersion = "2.0 > *"
 
     def author = "Benoit Hediard"
