@@ -26,6 +26,8 @@ class SegmentioTagLib {
      * @attr originalId The original ID that the user was recognized by. This defaults to the currently identified user's ID if there is one. In most cases you don't need to pass this argument.
      */
     def alias = { attrs ->
+        assert attrs.newId
+        if (!attrs.originalId) attrs.originalId = ''
         if (enabled) {
             out << render(template: '/tags/alias', model: attrs, plugin: 'segmentio')
         }
@@ -39,6 +41,9 @@ class SegmentioTagLib {
      * @attr context A map of of environment variables that aren't a trait of the user. Ex.: list of providers or userAgent
      */
     def identify = { attrs ->
+        assert attrs.userId
+        if (!attrs.context) attrs.context = [:]
+        if (!attrs.traits) attrs.traits = [:]
         if (enabled) {
             out << render(template: '/tags/identify', model: attrs, plugin: 'segmentio')
         }
@@ -51,6 +56,8 @@ class SegmentioTagLib {
      * @attr traits A map of traits you know about the group. Things like: name, subscriptionPlan, etc.
      */
     def group = { attrs ->
+        assert attrs.groupId
+        if (!attrs.traits) attrs.traits = [:]
         if (enabled) {
             out << render(template: '/tags/group', model: attrs, plugin: 'segmentio')
         }
@@ -62,6 +69,7 @@ class SegmentioTagLib {
      * @attr url The URL of the current page you're tracking. By default, services will use the current URL. If your app doesn't update the URL automatically, you'll want to pass it in here.
      */
     def pageview = { attrs ->
+        if (!attrs.url) attrs.url = ''
         if (enabled) {
             out << render(template: '/tags/pageview', model: attrs, plugin: 'segmentio')
         }
@@ -73,6 +81,7 @@ class SegmentioTagLib {
      * @attr callback REQUIRED A callback you want to fire after analytics have loaded.
      */
     def ready = { attrs ->
+        assert attrs.callback
         if (enabled) {
             out << render(template: '/tags/ready', model: attrs, plugin: 'segmentio')
         }
@@ -86,6 +95,9 @@ class SegmentioTagLib {
      * @attr context A map of of environment variables that aren't a property of the user. Ex.: list of providers or userAgent
      */
     def track = { attrs ->
+        assert attrs.event
+        if (!attrs.context) attrs.context = [:]
+        if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/track', model: attrs, plugin: 'segmentio')
         }
@@ -100,6 +112,10 @@ class SegmentioTagLib {
      * @attr context A map of of environment variables that aren't a property of the user. Ex.: list of providers or userAgent
      */
     def trackForm = { attrs ->
+        assert attrs.form
+        assert attrs.event
+        if (!attrs.context) attrs.context = [:]
+        if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/trackForm', model: attrs, plugin: 'segmentio')
         }
@@ -114,6 +130,10 @@ class SegmentioTagLib {
      * @attr context A map of of environment variables that aren't a property of the user. Ex.: list of providers or userAgent
      */
     def trackLink = { attrs ->
+        assert attrs.link
+        assert attrs.event
+        if (!attrs.context) attrs.context = [:]
+        if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/trackLink', model: attrs, plugin: 'segmentio')
         }
