@@ -15,7 +15,7 @@ grails.project.dependency.resolution = {
         test 'org.spockframework:spock-grails-support:0.7-groovy-2.0'
     }
     plugins {
-        build(':release:2.2.1', ':rest-client-builder:1.0.3') {
+        build(':release:3.0.1', ':rest-client-builder:1.0.3') {
             export = false
         }
         runtime ':resources:1.2'
