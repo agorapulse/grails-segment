@@ -1,4 +1,4 @@
 <%@ page import="grails.converters.JSON" %>
-<r:script>
+<script type="text/javascript">
     analytics.trackLink(${link}, '${event}', ${properties ? properties as JSON : '{}'}, ${context ? context as JSON : '{}'});
-</r:script>
+</script>

@@ -1,3 +1,3 @@
-<r:script>
+<script type="text/javascript">
     analytics.ready(${callback});
-</r:script>
+</script>

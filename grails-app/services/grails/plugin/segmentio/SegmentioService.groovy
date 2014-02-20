@@ -20,7 +20,9 @@ class SegmentioService implements InitializingBean {
         } else {
             log.debug "Initializing Segment.io service"
             Options options = new Options()
-            if (config.maxQueueSize) options.maxQueueSize = config.maxQueueSize // default to 10000 (10 000 messages)
+            if (config.maxQueueSize) {
+                options.maxQueueSize = config.maxQueueSize
+            } // default to 10000 (10 000 messages)
             Analytics.initialize(config.apiSecret, options)
         }
     }
