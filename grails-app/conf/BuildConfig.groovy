@@ -11,7 +11,7 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         compile 'com.github.segmentio:analytics:0.4.0'
-        compile 'joda-time:joda-time:2.1'
+        compile 'joda-time:joda-time:2.3'
         test 'org.spockframework:spock-grails-support:0.7-groovy-2.0'
     }
     plugins {
