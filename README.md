@@ -1,7 +1,7 @@
 Segment.io Grails Plugin
 =========================
 
-[![Build Status](https://travis-ci.org/benorama/grails-segmentio.png)](https://travis-ci.org/benorama/grails-segmentio)
+[![Build Status](https://travis-ci.org/benorama/grails-segmentio.png)](https://travis-ci.org/agorapulse/grails-segmentio)
 
 # Introduction
 
@@ -30,7 +30,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.3.1.1'
+				runtime ':segmentio:0.4.0'
 		}
 }
 ```
@@ -193,6 +193,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-02-20 **V0.4.0** : Grails Resources plugin dependency removed + SegmentIO Analytics java lib upgraded to 0.4.0
 * 2013-10-29 **V0.3.1.1** : Minor issue fixes (initialize undefined taglib attributes)
 * 2013-09-03 **V0.3.1** : updated to segmentio 0.3.1
 * 2013-05-11 **V0.2.0** : updated to segmentio 0.2.0 (thanks to pull request by tuler)
@@ -201,8 +202,3 @@ It will generate the corresponding javascript code that will be automatically de
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/benorama/grails-segmentio/issues) section on GitHub.
-
-
-# Beta status
-
-This is a **beta release**.
