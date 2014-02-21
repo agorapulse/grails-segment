@@ -201,4 +201,4 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Bugs
 
-To report any bug, please use the project [Issues](http://github.com/benorama/grails-segmentio/issues) section on GitHub.
+To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-segmentio/issues) section on GitHub.
