@@ -63,7 +63,7 @@ class SegmentioService implements InitializingBean {
             Analytics.identify(
                     userId.toString(),
                     traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
-                    timestamp,
+                    timestamp ?: new DateTime(),
                     buildContext(context)
             )
         }
@@ -106,7 +106,7 @@ class SegmentioService implements InitializingBean {
                     userId.toString(),
                     event,
                     properties ? new EventProperties(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    timestamp,
+                    timestamp ?: new DateTime(),
                     buildContext(context)
             )
         }
