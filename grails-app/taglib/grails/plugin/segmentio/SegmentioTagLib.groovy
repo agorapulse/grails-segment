@@ -34,7 +34,7 @@ class SegmentioTagLib {
     }
 
     /**
-     * Identitify current user
+     * Identify current user
      *
      * @attr userId REQUIRED The ID you refer to the user by in your database.
      * @attr traits A map of traits you know about the user. Things like: email, name, subscriptionPlan, etc.
@@ -66,12 +66,25 @@ class SegmentioTagLib {
     /**
      * Page view
      *
-     * @attr url The URL of the current page you're tracking. By default, services will use the current URL. If your app doesn't update the URL automatically, you'll want to pass it in here.
+     * @attr category The category of the page. You must include the name if you send this. Useful if you have areas of site with lots of content.
+     * @attr name The name of the of the page,
+     * @attr properties A map of properties for the event. If the event was 'Added to Shopping Cart', it might have properties like price, productType, etc.
+     * @attr context A map of of environment variables that aren't a property of the user. Ex.: list of providers or userAgent
      */
-    def pageview = { attrs ->
-        if (!attrs.url) attrs.url = ''
+    def page = { attrs ->
+        if (!attrs.category) attrs.category = ''
+        if (!attrs.name) attrs.name = ''
+        if (!attrs.context) attrs.context = [:]
+        if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
-            out << render(template: '/tags/pageview', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/page', model: attrs, plugin: 'segmentio')
+        }
+    }
+
+    // Legacy tag
+    def pageview = { attrs ->
+        if (enabled) {
+            out << render(template: '/tags/page', model: attrs, plugin: 'segmentio')
         }
     }
 

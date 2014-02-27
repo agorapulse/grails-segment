@@ -181,7 +181,9 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
     properties="${[plan: 'Pro', revenue: 99.95]}"/>
 
 <!-- Page view -->
-<segmentio:pageview url="http://mydomain.com/somepath"/>
+<segmentio:page/>
+<!-- or -->
+<segmentio:page category="Some category" name="Page title"/>
 
 <!-- Alias identity -->
 <segmentio:alias originalId="bob@bob.com" newId="bob"/>
