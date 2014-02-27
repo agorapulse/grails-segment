@@ -23,7 +23,7 @@ class SegmentioService implements InitializingBean {
             if (config.maxQueueSize) {
                 options.maxQueueSize = config.maxQueueSize
             } // default to 10000 (10 000 messages)
-            Analytics.initialize(config.apiSecret, options)
+            Analytics.initialize(config.apiKey, options)
         }
     }
 
@@ -143,7 +143,7 @@ class SegmentioService implements InitializingBean {
 
     private boolean isEnabled() {
         boolean configEnabled = false
-        if (config?.apiSecret) {
+        if (config?.apiKey) {
             // default enabled for PROD
             configEnabled = (Environment.current == Environment.PRODUCTION)
 

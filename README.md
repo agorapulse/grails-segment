@@ -38,13 +38,12 @@ grails.project.dependency.resolution = {
 
 # Config
 
-Create a [Segment.io](http://segment.io) account, in order to get your own _apiKey_ (for client-side API calls) and _apiSecret_ (for server-side API calls).
+Create a [Segment.io](http://segment.io) account, in order to get your own _apiKey_ (for client-side API calls).
 
-Add your Segment.io site _apiKey_  and _apiSecret_ to your _grails-app/conf/Config.groovy_:
+Add your Segment.io site _apiKey_  to your _grails-app/conf/Config.groovy_:
 
 ```groovy
-grails.plugin.segmentio.apiKey = {API_KEY} // Read key
-grails.plugin.segmentio.apiSecret = {API_SECRET} // Write key
+grails.plugin.segmentio.apiKey = {API_KEY} // Write key
 ```
 By default the Segment.io will only be enabled for Production environments.  If you need it to be enabled for other environments, make sure that it is explicitly enabled in your configs.
 

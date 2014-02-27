@@ -22,7 +22,7 @@ class SegmentioServiceSpec extends Specification {
     def "should be enabled for PRODUCTION by default"() {
         when:
         setEnvironment(Environment.PRODUCTION)
-        buildConfig(apiSecret: 'apiSecret')
+        buildConfig(apiKey: 'apiKey')
 
         then:
         service.enabled
@@ -31,7 +31,7 @@ class SegmentioServiceSpec extends Specification {
     def "should be disabled for NON-PRODUCTION by default" () {
         when:
         setEnvironment(Environment.CUSTOM)
-        buildConfig(apiSecret: 'apiSecret')
+        buildConfig(apiKey: 'apiKey')
 
         then:
         !service.enabled
@@ -39,7 +39,7 @@ class SegmentioServiceSpec extends Specification {
 
     def "should be enabled when config enables SegmentIo" () {
         when:
-        buildConfig(apiSecret: 'apiSecret', enabled: true)
+        buildConfig(apiKey: 'apiKey', enabled: true)
 
         then:
         service.enabled
@@ -48,7 +48,7 @@ class SegmentioServiceSpec extends Specification {
     def "should be disabled for PRODUCTION when config disables SegmentIo" () {
         when:
         setEnvironment(Environment.PRODUCTION)
-        buildConfig(apiSecret: 'apiSecret', enabled: false)
+        buildConfig(apiKey: 'apiKey', enabled: false)
 
         then:
         !service.enabled
