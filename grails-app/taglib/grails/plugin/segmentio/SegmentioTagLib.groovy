@@ -14,7 +14,8 @@ class SegmentioTagLib {
     def initJS = { attrs ->
         if (enabled) {
             Map model = [
-                    apiKey: config.apiKey
+                    apiKey: config.apiKey,
+                    pageTracked: attrs.pageTracked ?: false
             ]
             out << render(template: '/tags/initJs', model: model, plugin: 'segmentio')
         }
@@ -77,13 +78,6 @@ class SegmentioTagLib {
         if (!attrs.name) attrs.name = ''
         if (!attrs.context) attrs.context = [:]
         if (!attrs.properties) attrs.properties = [:]
-        if (enabled) {
-            out << render(template: '/tags/page', model: attrs, plugin: 'segmentio')
-        }
-    }
-
-    // Legacy tag
-    def pageview = { attrs ->
         if (enabled) {
             out << render(template: '/tags/page', model: attrs, plugin: 'segmentio')
         }
