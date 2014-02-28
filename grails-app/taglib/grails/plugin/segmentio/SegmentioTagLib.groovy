@@ -47,6 +47,14 @@ class SegmentioTagLib {
         if (!attrs.context) attrs.context = [:]
         if (!attrs.traits) attrs.traits = [:]
         if (enabled) {
+            if (intercomSecureModeEnabled) {
+                def userHash = attrs.userId.toString().encodeAsIntercomHash()
+                if (attrs.context.Intercom) {
+                    attrs.context.Intercom += [userHash: userHash]
+                } else {
+                    attrs.context += [Intercom: [userHash: userHash]]
+                }
+            }
             out << render(template: '/tags/identify', model: attrs, plugin: 'segmentio')
         }
     }
@@ -165,6 +173,14 @@ class SegmentioTagLib {
             }
         }
         configEnabled
+    }
+
+    private boolean isIntercomSecureModeEnabled() {
+        if (config?.intercomSecretKey) {
+            true
+        } else {
+            false
+        }
     }
 
 }
