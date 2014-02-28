@@ -138,6 +138,13 @@ To use [Segment.io Analytics.js Library](http://support.segmentio.com/apis/javas
     <segmentio:initJS/>
 ```
 
+Or with page view tracking:
+
+```jsp
+    <segmentio:initJS pageTracked="true"/>
+```
+
+
 # Identification and event recording
 
 Once initialized, you can use [Segment.io Javascript Library](https://segment.io/libraries/analytics.js) in your GSP views.
@@ -181,8 +188,12 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
     properties="${[plan: 'Pro', revenue: 99.95]}"/>
 
 <!-- Page view -->
-<segmentio:page/>
-<!-- or -->
+<segmentio:page category="Some category" name="Page title"/>
+
+<!-- Page view with name -->
+<segmentio:page name="Page title"/>
+
+<!-- Page view with category and name -->
 <segmentio:page category="Some category" name="Page title"/>
 
 <!-- Alias identity -->
