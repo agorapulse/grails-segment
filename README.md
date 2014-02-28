@@ -30,7 +30,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.4.0.1'
+				runtime ':segmentio:0.4.0.2'
 		}
 }
 ```
@@ -49,6 +49,12 @@ By default the Segment.io will only be enabled for Production environments.  If 
 
 ```groovy
 grails.plugin.segmentio.enabled = true
+```
+
+If you're using Intercom, you can automatically enable Intercom secure mode (for `segmentio:identify`) by adding you Intercom secret key:
+
+```groovy
+grails.plugin.segmentio.intercomSecretKey = {INTERCOM_SECRET_KEY}
 ```
 
 Server side client uses the default following config:
@@ -205,6 +211,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-02-28 **V0.4.0.2** : Intercom secure mode integration
 * 2014-02-28 **V0.4.0.1** :
     - Analytics JS initialization code updated to 2.0.8,
     - segmentio:pageview renamed to segmentio:page (BREAKING),
