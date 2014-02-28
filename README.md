@@ -26,7 +26,11 @@ grails.project.dependency.resolution = {
 				//your repositories
 		}
 		dependencies {
-				//your dependencies
+				// Latest httpclient used by SegmentIO java lib - Might be required to resolve dependency issues with older httpclient used by other plugins
+				build 'org.apache.httpcomponents:httpcore:4.3.1'
+                build 'org.apache.httpcomponents:httpclient:4.3.1'
+                runtime 'org.apache.httpcomponents:httpcore:4.3.1'
+                runtime 'org.apache.httpcomponents:httpclient:4.3.1'
 		}
 		plugins {
 				//here go your plugin dependencies
