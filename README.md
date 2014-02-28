@@ -209,7 +209,7 @@ It will generate the corresponding javascript code that will be automatically de
     - Analytics JS initialization code updated to 2.0.8,
     - segmentio:pageview renamed to segmentio:page (BREAKING),
     - apiSecret config param removed,
-    - if `timestamp` is not provided to `segmentioService.track, default to server current time.
+    - if `timestamp` is not provided to `segmentioService.track`, default to server current time.
 * 2014-02-20 **V0.4.0** : Grails Resources plugin dependency removed + SegmentIO Analytics java lib upgraded to 0.4.0
 * 2013-10-29 **V0.3.1.1** : Minor issue fixes (initialize undefined taglib attributes)
 * 2013-09-03 **V0.3.1** : updated to segmentio 0.3.1
