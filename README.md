@@ -148,10 +148,10 @@ To use [Segment.io Analytics.js Library](http://support.segmentio.com/apis/javas
     <segmentio:initJS/>
 ```
 
-Or with page view tracking:
+Or with default page view tracking disabled:
 
 ```jsp
-    <segmentio:initJS pageTracked="true"/>
+    <segmentio:initJS pageTracked="false"/>
 ```
 
 
@@ -215,6 +215,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-03-05 **V0.4.0.3** : page tracking enabled by default in `segmentio:initJS` tag.
 * 2014-02-28 **V0.4.0.2** : Intercom secure mode integration
 * 2014-02-28 **V0.4.0.1** :
     - Analytics JS initialization code updated to 2.0.8,
