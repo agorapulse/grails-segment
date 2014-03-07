@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.4.0.2'
+				runtime ':segmentio:0.4.0.4'
 		}
 }
 ```
@@ -215,6 +215,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-03-08 **V0.4.0.4** : typo fix in `segmentio:page tag.
 * 2014-03-05 **V0.4.0.3** : page tracking enabled by default in `segmentio:initJS` tag.
 * 2014-02-28 **V0.4.0.2** : Intercom secure mode integration
 * 2014-02-28 **V0.4.0.1** :
