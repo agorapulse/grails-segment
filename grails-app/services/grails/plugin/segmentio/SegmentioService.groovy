@@ -35,6 +35,26 @@ class SegmentioService implements InitializingBean {
     }
 
     /**
+     * Alias method lets you merge two user profiles, including their actions and traits.
+     *
+     * @param from
+     *            the user's id after they are logged in. It's the same id as
+     *            which you would recognize a signed-in user in your system.
+     *
+     * @param to
+     *            new user id
+     */
+    void alias(def from, def to) {
+        if (enabled) {
+            log.debug "Aliasing from=$from to=$to"
+            Analytics.alias(
+                    from.toString(),
+                    to.toString()
+            )
+        }
+    }
+
+    /**
      * Identifying a user ties all of their actions to an id, and associates
      * user traits to that id.
      *
