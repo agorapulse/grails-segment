@@ -66,6 +66,12 @@ Server side client uses the default following config:
 ```groovy
 // Queue size limit
 grails.plugin.segmentio.maxQueueSize = 10000
+// The amount of milliseconds that passes before a request is marked as timed out
+grails.plugin.segmentio.timeout = 10000
+// How many times to retry the request.
+grails.plugin.segmentio.retries = 2
+// Backoff in milliseconds between retries.
+grails.plugin.segmentio.backoff = 1000
 ```
 
 # Usage
@@ -218,6 +224,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-03-27 **V0.4.2** : analytics-java lib updated to segmentio 0.4.2 (retry count + timeout added)
 * 2014-03-13 **V0.4.0.5** : new `segmentioService.alias(from, to)` method.
 * 2014-03-08 **V0.4.0.4** : typo fix in `segmentio:page` tag.
 * 2014-03-05 **V0.4.0.3** : page tracking enabled by default in `segmentio:initJS` tag.
