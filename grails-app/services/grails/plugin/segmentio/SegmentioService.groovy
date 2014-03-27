@@ -21,8 +21,17 @@ class SegmentioService implements InitializingBean {
             log.debug "Initializing Segment.io service"
             Options options = new Options()
             if (config.maxQueueSize) {
-                options.maxQueueSize = config.maxQueueSize
-            } // default to 10000 (10 000 messages)
+                options.maxQueueSize = config.maxQueueSize // default to 10000 (10 000 messages)
+            }
+            if (config.timeout) {
+                options.timeout = config.timeout // default to 10000 (10s)
+            }
+            if (config.retries) {
+                options.retries = config.retries // default to 2
+            }
+            if (config.backoff) {
+                options.backoff = config.backoff // default to 1000 (1s)
+            }
             Analytics.initialize(config.apiKey, options)
         }
     }
