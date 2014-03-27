@@ -8,11 +8,12 @@ class SegmentioTagLib {
 
     /**
      * Initialize Segment.io
+     * @attr enabled JS loading (default to config value)
      * @attr pageTracked Track page view (default to true)
      * @attr providers A dictionary of the analytics providers you want to enable. Each provider takes a string of your API key for the service. Or, if you want to supply additional settings, you can also pass a dictionary of provider-specific settings as well. You only need to call this method if you're using your own copy of analytics.js on it's own.
      */
     def initJS = { attrs ->
-        if (enabled) {
+        if (enabled || attrs.enabled) {
             Map model = [
                     apiKey: config.apiKey,
                     pageTracked: attrs.containsKey('pageTracked') ? attrs.pageTracked : true
