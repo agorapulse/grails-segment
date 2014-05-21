@@ -9,7 +9,7 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        // Latest httpcore and httpmime
+        // Latest httpcore and httpmime for coveralls plugin
         build 'org.apache.httpcomponents:httpcore:4.3.2'
         build 'org.apache.httpcomponents:httpclient:4.3.2'
         build 'org.apache.httpcomponents:httpmime:4.3.3'
