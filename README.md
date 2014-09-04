@@ -140,6 +140,26 @@ segmentioService.track(
     ]
 )
 
+// Group
+segmentioService.group('bob@bob.com', 'companyId', [
+    name: 'The company name',
+    website: 'http://www.company.com'
+])
+
+// Record page view
+segmentioService.page('Pricing')
+
+// Record page view with extra info
+segmentioService.page('bob@bob.com', 'Pricing', 'Business', [
+    title: 'Segment.io Pricing',
+    path: '/pricing'
+])
+
+// Record screen view
+segmentioService.screen('bob@bob.com', 'Register', 'Business', [
+    type: 'facebook'
+])
+
 // Alias identity
 segmentioService.alias('bob@bob.com', 'bob')
 ```
@@ -224,6 +244,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-09-04 **v1.0.0** : analytics-java lib upgraded to segmentio 1.0.0 + group(), page() and screen() methods added
 * 2014-05-14 **V0.4.3** : init js updated (snippet version 2.0.9)
 * 2014-03-27 **V0.4.2** : analytics-java lib updated to segmentio 0.4.2 (retry count + timeout added)
 * 2014-03-13 **V0.4.0.5** : new `segmentioService.alias(from, to)` method.
