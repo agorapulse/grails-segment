@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:0.4.3'
+				runtime ':segmentio:1.0.0'
 		}
 }
 ```
