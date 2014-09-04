@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
         build 'org.apache.httpcomponents:httpclient:4.3.2'
         build 'org.apache.httpcomponents:httpmime:4.3.3'
         // Latest Segment.io analytics java client
-        compile 'com.github.segmentio:analytics:0.4.2'
+        compile 'com.github.segmentio:analytics:1.0.0'
         // Latest Joda Time
         compile 'joda-time:joda-time:2.3'
     }
@@ -33,7 +33,7 @@ grails.project.dependency.resolution = {
                 ':coveralls:0.1') {
             export = false
         }
-        test(':code-coverage:1.2.7') {
+        test(':code-coverage:2.0.3-2') {
             export = false
         }
     }
