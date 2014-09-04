@@ -1,6 +1,15 @@
-grails.project.work.dir = 'target'
-grails.project.source.level = 1.6
+grails.project.class.dir = "target/classes"
+grails.project.test.class.dir = "target/test-classes"
+grails.project.test.reports.dir = "target/test-reports"
 
+grails.project.fork = [
+        test: false, //[maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+        run: false, // [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+        war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+        console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+]
+
+grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     inherits 'global'
     log 'warn'
