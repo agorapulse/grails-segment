@@ -20,10 +20,10 @@ grails.project.dependency.resolution = {
     dependencies {
         // Latest httpcore and httpmime for coveralls plugin
         build 'org.apache.httpcomponents:httpcore:4.3.2'
-        build 'org.apache.httpcomponents:httpclient:4.3.2'
-        build 'org.apache.httpcomponents:httpmime:4.3.3'
+        build 'org.apache.httpcomponents:httpclient:4.3.5'
+        build 'org.apache.httpcomponents:httpmime:4.3.5'
         // Latest Segment.io analytics java client
-        compile 'com.github.segmentio:analytics:1.0.0'
+        compile 'com.github.segmentio:analytics:1.0.4'
         // Latest Joda Time
         compile 'joda-time:joda-time:2.3'
     }
