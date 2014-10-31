@@ -27,14 +27,14 @@ grails.project.dependency.resolution = {
 		}
 		dependencies {
 				// Latest httpclient used by SegmentIO java lib - Might be required to resolve dependency issues with older httpclient used by other plugins
-				build 'org.apache.httpcomponents:httpcore:4.3.1'
-                build 'org.apache.httpcomponents:httpclient:4.3.1'
-                runtime 'org.apache.httpcomponents:httpcore:4.3.1'
-                runtime 'org.apache.httpcomponents:httpclient:4.3.1'
+				build 'org.apache.httpcomponents:httpcore:4.3.2'
+                build 'org.apache.httpcomponents:httpclient:4.3.5'
+                runtime 'org.apache.httpcomponents:httpcore:4.3.2'
+                runtime 'org.apache.httpcomponents:httpclient:4.3.5'
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:1.0.0'
+				runtime ':segmentio:1.0.4'
 		}
 }
 ```
@@ -244,6 +244,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2014-09-31 **v1.0.4** : analytics-java lib upgraded to segmentio 1.0.4
 * 2014-09-04 **v1.0.0** : analytics-java lib upgraded to segmentio 1.0.0 + group(), page() and screen() methods added
 * 2014-05-14 **V0.4.3** : init js updated (snippet version 2.0.9)
 * 2014-03-27 **V0.4.2** : analytics-java lib updated to segmentio 0.4.2 (retry count + timeout added)
