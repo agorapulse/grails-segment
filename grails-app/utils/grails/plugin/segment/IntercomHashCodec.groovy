@@ -1,4 +1,4 @@
-package grails.plugin.segmentio
+package grails.plugin.segment
 
 import grails.util.Holders
 
