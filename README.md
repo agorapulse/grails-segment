@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:1.0.4'
+				runtime ':segmentio:1.0.7'
 		}
 }
 ```
@@ -244,6 +244,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2015-03-22 **v1.0.7** : analytics-java lib upgraded to segmentio 1.0.7
 * 2014-09-31 **v1.0.4** : analytics-java lib upgraded to segmentio 1.0.4
 * 2014-09-04 **v1.0.0** : analytics-java lib upgraded to segmentio 1.0.0 + group(), page() and screen() methods added
 * 2014-05-14 **V0.4.3** : init js updated (snippet version 2.0.9)
