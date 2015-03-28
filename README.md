@@ -7,12 +7,11 @@ Segment Grails Plugin
 
 The **Segment Plugin** allows you to integrate [Segment](http://segment.com) in your [Grails](http://grails.org) application.
 
-Segment.io lets you send your analytics data to any service you want, without you having to integrate with each one individually.
+Segment lets you send your analytics data to any service you want, without you having to integrate with each one individually.
 
 It provides the following Grails artefacts:
-* **SegmentService** - A server side service client to call [Segment APIs](https://segment.com/docs/libraries/).
+* **SegmentService** - A server side service client to call [Segment APIs](https://segment.com/docs/libraries/http/), which is a wrapper around the official Segment [Analytics for Java](https://segment.com/docs/libraries/java/) library.
 * **SegmentTagLib** - A collection of tags to use [Segment Analytics.js Library](https://segment.com/docs/libraries/analytics.js/) in your GSPs.
-
 
 # Installation
 
@@ -40,7 +39,7 @@ Add your Segment.io site _apiKey_  to your _grails-app/conf/application.yml_:
 grails:
     plugin:
         segment:
-            apiKey: {API_KEY} // Write key
+            apiKey: {API_KEY} # Write key
 ```
 By default, Segment integration will only be enabled for Production environments.  If you need it to be enabled for other environments, make sure that it is explicitly enabled in your configs.
 
@@ -73,7 +72,7 @@ grails:
             # How many times to retry the request.
             retries: 2
             # Backoff in milliseconds between retries.
-            backoff = 1000
+            backoff: 1000
 ```
 
 # Usage
@@ -240,9 +239,6 @@ Once initialized, you can use [Segment Analytics.js Library](https://segment.com
 <!-- Alias identity -->
 <segment:alias originalId="bob@bob.com" newId="bob"/>
 ```
-
-It will generate the corresponding javascript code that will be automatically deferred to page footer thanks to [Grails Resources framework](https://github.com/grails-plugins/grails-resources).
-
 
 # Latest releases
 
