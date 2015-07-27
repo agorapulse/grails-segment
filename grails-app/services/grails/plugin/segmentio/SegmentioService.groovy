@@ -286,7 +286,7 @@ class SegmentioService implements InitializingBean {
 
     private boolean isEnabled() {
         boolean configEnabled = false
-        if (config?.apiKey || config?.serverApiKey) {
+        if (config?.apiKey || config?.serverApiKey) {
             // default enabled for PROD
             configEnabled = (Environment.current == Environment.PRODUCTION)
 
