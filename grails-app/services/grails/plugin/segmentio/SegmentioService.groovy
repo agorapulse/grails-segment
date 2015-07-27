@@ -34,7 +34,7 @@ class SegmentioService implements InitializingBean {
             if (config.backoff) {
                 options.backoff = config.backoff // default to 1000 (1s)
             }
-            Analytics.initialize(config.apiKey, options)
+            Analytics.initialize(config.serverApiKey ?: config.apiKey, options)
             analytics = new Analytics()
         }
     }
@@ -286,7 +286,7 @@ class SegmentioService implements InitializingBean {
 
     private boolean isEnabled() {
         boolean configEnabled = false
-        if (config?.apiKey) {
+        if (config?.apiKey || config?.serverApiKey) {
             // default enabled for PROD
             configEnabled = (Environment.current == Environment.PRODUCTION)
 
