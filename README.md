@@ -55,6 +55,12 @@ By default the Segment.io will only be enabled for Production environments.  If 
 grails.plugin.segmentio.enabled = true
 ```
 
+If you want a different `apiKey` for server side tracking, you can specify a server side API key.
+
+```groovy
+grails.plugin.segmentio.serverApiKey = {API_KEY} // Write key, for server side tracking
+```
+
 If you're using Intercom, you can automatically enable Intercom secure mode (for `segmentio:identify`) by adding you Intercom secret key:
 
 ```groovy
@@ -244,6 +250,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2015-07-27 **v1.0.7.1** : new `serverApiKey`conf param added
 * 2015-03-22 **v1.0.7** : analytics-java lib upgraded to segmentio 1.0.7
 * 2014-09-31 **v1.0.4** : analytics-java lib upgraded to segmentio 1.0.4
 * 2014-09-04 **v1.0.0** : analytics-java lib upgraded to segmentio 1.0.0 + group(), page() and screen() methods added
