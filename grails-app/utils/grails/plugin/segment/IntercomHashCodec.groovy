@@ -21,7 +21,7 @@ class IntercomHashCodec {
     }
 
     static String getSecretKey() {
-        return Holders.config.grails.plugin.segmentio.intercomSecretKey
+        return config?.intercomSecretKey
     }
 
     private static Mac setupMac(secretKey) {
@@ -30,4 +30,14 @@ class IntercomHashCodec {
         hmacSHA256.init(secretKeySpec)
         return hmacSHA256
     }
+
+    private static def getConfig() {
+        if (Holders.config.grails?.plugin?.segment) {
+            Holders.config.grails?.plugin?.segment
+        } else if (Holders.config.grails?.plugin?.segmentio) {
+            // Legacy config
+            Holders.config.grails?.plugin?.segmentio
+        }
+    }
+
 }
