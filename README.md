@@ -2,6 +2,7 @@ Segment Grails Plugin
 =====================
 
 [![Build Status](https://travis-ci.org/agorapulse/grails-segmentio.png)](https://travis-ci.org/agorapulse/grails-segmentio)
+[![Download](https://api.bintray.com/packages/agorapulse/plugins/segment/images/download.svg)](https://bintray.com/agorapulse/plugins/segment/_latestVersion)
 
 # Introduction
 
