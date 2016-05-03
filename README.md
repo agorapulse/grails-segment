@@ -24,7 +24,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:segment:2.0.2"
+    compile "org.grails.plugins:segment:2.0.3"
 }
 ```
 
