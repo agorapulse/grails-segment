@@ -24,7 +24,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:segment:2.0.1"
+    compile "org.grails.plugins:segment:2.0.2"
 }
 ```
 
@@ -239,28 +239,6 @@ Once initialized, you can use [Segment Analytics.js Library](https://segment.com
 <!-- Alias identity -->
 <segment:alias originalId="bob@bob.com" newId="bob"/>
 ```
-
-# Latest releases
-
-* 2015-03-22 **v1.0.7** : analytics-java lib upgraded to segmentio 1.0.7
-* 2014-09-31 **v1.0.4** : analytics-java lib upgraded to segmentio 1.0.4
-* 2014-09-04 **v1.0.0** : analytics-java lib upgraded to segmentio 1.0.0 + group(), page() and screen() methods added
-* 2014-05-14 **V0.4.3** : init js updated (snippet version 2.0.9)
-* 2014-03-27 **V0.4.2** : analytics-java lib updated to segmentio 0.4.2 (retry count + timeout added)
-* 2014-03-13 **V0.4.0.5** : new `segmentService.alias(from, to)` method.
-* 2014-03-08 **V0.4.0.4** : typo fix in `segment:page` tag.
-* 2014-03-05 **V0.4.0.3** : page tracking enabled by default in `segment:initJS` tag.
-* 2014-02-28 **V0.4.0.2** : Intercom secure mode integration
-* 2014-02-28 **V0.4.0.1** :
-    - Analytics JS initialization code updated to 2.0.8,
-    - segment:pageview renamed to segment:page (BREAKING),
-    - apiSecret config param removed,
-    - if `timestamp` is not provided to `segmentService.track`, default to server current time.
-* 2014-02-20 **V0.4.0** : Grails Resources plugin dependency removed + SegmentIO Analytics java lib upgraded to 0.4.0
-* 2013-10-29 **V0.3.1.1** : Minor issue fixes (initialize undefined taglib attributes)
-* 2013-09-03 **V0.3.1** : updated to segmentio 0.3.1
-* 2013-05-11 **V0.2.0** : updated to segmentio 0.2.0 (thanks to pull request by tuler)
-* 2013-03-25 **V0.1.7** : initial release
 
 # Bugs
 
