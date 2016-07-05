@@ -250,6 +250,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2016-07-05 **v1.0.7.2** : new `active` options context param added
 * 2015-07-27 **v1.0.7.1** : new `serverApiKey`conf param added
 * 2015-03-22 **v1.0.7** : analytics-java lib upgraded to segmentio 1.0.7
 * 2014-09-31 **v1.0.4** : analytics-java lib upgraded to segmentio 1.0.4
