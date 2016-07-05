@@ -264,8 +264,11 @@ class SegmentioService implements InitializingBean {
                 sioOptions.setIntegration(integration, enabled)
             }
         }
-        if (options.ip || options.language || options.userAgent) {
+        if (options.containsKey('active') || options.ip || options.language || options.userAgent) {
             Context sioContext = new Context()
+            if (options.containsKey('active')) {
+                sioContext.active = options.active
+            }
             if (options.ip) {
                 sioContext.ip = options.ip
             }
