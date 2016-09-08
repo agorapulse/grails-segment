@@ -25,7 +25,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:segment:2.0.4"
+    compile "org.grails.plugins:segment:2.0.5"
 }
 ```
 
@@ -58,22 +58,6 @@ grails:
     plugin:
         segment:
             intercomSecretKey: {INTERCOM_SECRET_KEY}
-```
-
-Server side client uses the default following config:
-
-```yml
-grails:
-    plugin:
-        segment:
-            # Queue size limit
-            maxQueueSize: 10000
-            # The amount of milliseconds that passes before a request is marked as timed out
-            timeout: 10000
-            # How many times to retry the request.
-            retries: 2
-            # Backoff in milliseconds between retries.
-            backoff: 1000
 ```
 
 # Usage
@@ -149,7 +133,7 @@ segmentService.group('bob@bob.com', 'companyId', [
 ])
 
 // Record page view
-segmentService.page('Pricing')
+segmentService.page('bob@bob.com', 'Pricing')
 
 // Record page view with extra info
 segmentService.page('bob@bob.com', 'Pricing', 'Business', [
