@@ -1,11 +1,7 @@
 package grails.plugin.segment
 
-import com.github.segmentio.Analytics
-import com.github.segmentio.Config
-import com.github.segmentio.models.Context
-import com.github.segmentio.models.Options
-import com.github.segmentio.models.Props
-import com.github.segmentio.models.Traits
+import com.segment.analytics.Analytics
+import com.segment.analytics.messages.*
 import grails.util.Environment
 import org.joda.time.DateTime
 import org.springframework.beans.factory.InitializingBean
@@ -21,21 +17,7 @@ class SegmentService implements InitializingBean {
             log.info "Segment is not enabled"
         } else {
             log.debug "Initializing Segment service"
-            Config options = new Config()
-            if (config.maxQueueSize) {
-                options.maxQueueSize = config.maxQueueSize // default to 10000 (10 000 messages)
-            }
-            if (config.timeout) {
-                options.timeout = config.timeout // default to 10000 (10s)
-            }
-            if (config.retries) {
-                options.retries = config.retries // default to 2
-            }
-            if (config.backoff) {
-                options.backoff = config.backoff // default to 1000 (1s)
-            }
-            Analytics.initialize(config.apiKey, options)
-            analytics = new Analytics()
+            analytics = Analytics.builder(config.apiKey).build()
         }
     }
 
@@ -44,7 +26,7 @@ class SegmentService implements InitializingBean {
      */
     void flush() {
         if (enabled) {
-            Analytics.flush()
+            analytics.flush()
         }
     }
 
@@ -61,10 +43,9 @@ class SegmentService implements InitializingBean {
     void alias(def from, def to) {
         if (enabled) {
             log.debug "Alias from=$from to=$to"
-            analytics.alias(
-                    from.toString(),
-                    to.toString()
-            )
+            MessageBuilder builder = AliasMessage.builder(from)
+                    .userId(to.toString())
+            analytics.enqueue(builder)
         }
     }
 
@@ -86,12 +67,11 @@ class SegmentService implements InitializingBean {
     void group(def userId, def groupId, Map traits = [:], Map options = [:]) {
         if (enabled) {
             log.debug "Group userId=$userId groupId=$groupId traits=$traits"
-            analytics.group(
-                    userId.toString(),
-                    groupId.toString(),
-                    traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options)
-            )
+            MessageBuilder builder = GroupMessage.builder(groupId.toString())
+                    .userId(userId.toString())
+                    .traits(traits)
+            addOptions(builder, options)
+            analytics.enqueue(builder)
         }
     }
 
@@ -119,11 +99,11 @@ class SegmentService implements InitializingBean {
     void identify(def userId, Map traits = [:], DateTime timestamp = null, Map options = [:]) {
         if (enabled) {
             log.debug "Identify userId=$userId traits=$traits timestamp=$timestamp options=$options"
-            analytics.identify(
-                    userId.toString(),
-                    traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
-            )
+            MessageBuilder builder = IdentifyMessage.builder()
+                    .userId(userId.toString())
+                    .traits(traits)
+            addOptions(builder, options, timestamp)
+            analytics.enqueue(builder)
         }
     }
 
@@ -159,13 +139,11 @@ class SegmentService implements InitializingBean {
     void page(def userId, String name, String category, Map properties = [:], DateTime timestamp = null, Map options = [:]) {
         if (enabled) {
             log.debug "Page userId=$userId name=$name category=$category properties=$properties timestamp=$timestamp options=$options"
-            analytics.page(
-                    userId.toString(),
-                    name,
-                    category,
-                    properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
-            )
+            MessageBuilder builder = PageMessage.builder(name)
+                    .userId(userId.toString())
+                    .properties(properties + [category: category])
+            addOptions(builder, options, timestamp)
+            analytics.enqueue(builder)
         }
     }
 
@@ -202,13 +180,11 @@ class SegmentService implements InitializingBean {
     void screen(def userId, String name, String category, Map properties = [:], DateTime timestamp = null, Map options = [:]) {
         if (enabled) {
             log.debug "Screen userId=$userId name=$name category=$category properties=$properties timestamp=$timestamp options=$options"
-            analytics.screen(
-                    userId.toString(),
-                    name,
-                    category,
-                    properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
-            )
+            MessageBuilder builder = ScreenMessage.builder(name)
+                    .userId(userId.toString())
+                    .properties(properties + [category: category])
+            addOptions(builder, options, timestamp)
+            analytics.enqueue(builder)
         }
     }
 
@@ -240,47 +216,42 @@ class SegmentService implements InitializingBean {
     void track(def userId, String event, Map properties = [:], DateTime timestamp = null, Map options = [:]) {
         if (enabled) {
             log.debug "Tracking userId=$userId event=$event properties=$properties timestamp=$timestamp options=$options"
-            analytics.track(
-                    userId.toString(),
-                    event,
-                    properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
-            )
+            MessageBuilder builder = TrackMessage.builder(event)
+                    .userId(userId.toString())
+                    .properties(properties)
+            addOptions(builder, options, timestamp)
+            analytics.enqueue(builder)
         }
     }
 
     // PRIVATE
 
-    private static Options buildOptions(Map options, DateTime timestamp = null) {
-        Options sioOptions = new Options()
+    private static MessageBuilder addOptions(MessageBuilder builder, Map options, DateTime timestamp = null) {
         if (timestamp) {
-            sioOptions.timestamp = timestamp
+            builder.timestamp(timestamp.toDate())
         }
         if (options.anonymousId) {
-            sioOptions.anonymousId = options.anonymousId
+            builder.anonymousId(UUID.fromString(options.anonymousId))
         }
         if (options.providers) {
-            options.providers.each { String integration, Boolean enabled ->
-                sioOptions.setIntegration(integration, enabled)
+            options.providers.each { String key, Boolean enabled ->
+                builder.enableIntegration(key, enabled)
             }
         }
-        if (options.containsKey('active') || options.ip || options.language || options.userAgent) {
-            Context sioContext = new Context()
-            if (options.containsKey('active')) {
-                sioContext.active = options.active
-            }
+        if (options.ip || options.language || options.userAgent) {
+            Map context = [:]
             if (options.ip) {
-                sioContext.ip = options.ip
+                context += [ip: options.ip]
             }
             if (options.language) {
-                sioContext.language = options.language
+                context += [language: options.language]
             }
             if (options.userAgent) {
-                sioContext.userAgent = options.userAgent
+                context += [userAgent: options.userAgent]
             }
-            sioOptions.context = sioContext
+            builder.context(context)
         }
-        sioOptions
+        builder
     }
 
     private def getConfig() {

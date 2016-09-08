@@ -16,9 +16,9 @@ class SegmentTagLib {
         if (enabled || attrs.enabled) {
             Map model = [
                     apiKey: config.apiKey,
-                    pageTracked: attrs.containsKey('pageTracked') ? attrs.pageTracked : true
+                    pageTracked: attrs.containsKey('pageTracked') ? attrs.pageTracked.toString().toBoolean() : true
             ]
-            out << render(template: '/tags/initJs', model: model, plugin: 'segmentio')
+            out << render(template: '/tags/initJs', model: model, plugin: 'segment')
         }
     }
 
@@ -32,7 +32,7 @@ class SegmentTagLib {
         assert attrs.newId
         if (!attrs.originalId) attrs.originalId = ''
         if (enabled) {
-            out << render(template: '/tags/alias', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/alias', model: attrs, plugin: 'segment')
         }
     }
 
@@ -56,7 +56,7 @@ class SegmentTagLib {
                     attrs.context += [Intercom: [userHash: userHash]]
                 }
             }
-            out << render(template: '/tags/identify', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/identify', model: attrs, plugin: 'segment')
         }
     }
 
@@ -70,7 +70,7 @@ class SegmentTagLib {
         assert attrs.groupId
         if (!attrs.traits) attrs.traits = [:]
         if (enabled) {
-            out << render(template: '/tags/group', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/group', model: attrs, plugin: 'segment')
         }
     }
 
@@ -88,7 +88,7 @@ class SegmentTagLib {
         if (!attrs.context) attrs.context = [:]
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
-            out << render(template: '/tags/page', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/page', model: attrs, plugin: 'segment')
         }
     }
 
@@ -100,7 +100,7 @@ class SegmentTagLib {
     def ready = { attrs ->
         assert attrs.callback
         if (enabled) {
-            out << render(template: '/tags/ready', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/ready', model: attrs, plugin: 'segment')
         }
     }
 
@@ -116,7 +116,7 @@ class SegmentTagLib {
         if (!attrs.context) attrs.context = [:]
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
-            out << render(template: '/tags/track', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/track', model: attrs, plugin: 'segment')
         }
     }
 
@@ -134,7 +134,7 @@ class SegmentTagLib {
         if (!attrs.context) attrs.context = [:]
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
-            out << render(template: '/tags/trackForm', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/trackForm', model: attrs, plugin: 'segment')
         }
     }
 
@@ -152,7 +152,7 @@ class SegmentTagLib {
         if (!attrs.context) attrs.context = [:]
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
-            out << render(template: '/tags/trackLink', model: attrs, plugin: 'segmentio')
+            out << render(template: '/tags/trackLink', model: attrs, plugin: 'segment')
         }
     }
 

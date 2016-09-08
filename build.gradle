@@ -53,9 +53,9 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
 
     // Latest Joda Time
-    compile 'joda-time:joda-time:2.9.2'
-    // Latest Segment.io analytics java client
-    compile 'com.github.segmentio:analytics:1.0.7'
+    compile 'joda-time:joda-time:2.9.4'
+    // Latest Segment analytics java client
+    compile 'com.segment.analytics.java:analytics:2.0.0-RC7'
 }
 
 task wrapper(type: Wrapper) {
