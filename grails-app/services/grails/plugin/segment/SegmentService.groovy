@@ -70,7 +70,7 @@ class SegmentService implements InitializingBean {
             MessageBuilder builder = GroupMessage.builder(groupId.toString())
                     .userId(userId.toString())
                     .traits(traits)
-            addOptions(builder, options)
+            addOptions(builder, options ?: defaultOptions)
             analytics.enqueue(builder)
         }
     }
@@ -102,7 +102,7 @@ class SegmentService implements InitializingBean {
             MessageBuilder builder = IdentifyMessage.builder()
                     .userId(userId.toString())
                     .traits(traits)
-            addOptions(builder, options, timestamp)
+            addOptions(builder, options ?: defaultOptions, timestamp)
             analytics.enqueue(builder)
         }
     }
@@ -142,7 +142,7 @@ class SegmentService implements InitializingBean {
             MessageBuilder builder = PageMessage.builder(name)
                     .userId(userId.toString())
                     .properties(properties + [category: category])
-            addOptions(builder, options, timestamp)
+            addOptions(builder, options ?: defaultOptions, timestamp)
             analytics.enqueue(builder)
         }
     }
@@ -183,7 +183,7 @@ class SegmentService implements InitializingBean {
             MessageBuilder builder = ScreenMessage.builder(name)
                     .userId(userId.toString())
                     .properties(properties + [category: category])
-            addOptions(builder, options, timestamp)
+            addOptions(builder, options ?: defaultOptions, timestamp)
             analytics.enqueue(builder)
         }
     }
@@ -219,7 +219,7 @@ class SegmentService implements InitializingBean {
             MessageBuilder builder = TrackMessage.builder(event)
                     .userId(userId.toString())
                     .properties(properties)
-            addOptions(builder, options, timestamp)
+            addOptions(builder, options ?: defaultOptions, timestamp)
             analytics.enqueue(builder)
         }
     }
@@ -233,8 +233,8 @@ class SegmentService implements InitializingBean {
         if (options.anonymousId) {
             builder.anonymousId(UUID.fromString(options.anonymousId))
         }
-        if (options.providers) {
-            options.providers.each { String key, Boolean enabled ->
+        if (options.integrations) {
+            options.integrations.each { String key, Boolean enabled ->
                 builder.enableIntegration(key, enabled)
             }
         }
@@ -261,6 +261,10 @@ class SegmentService implements InitializingBean {
             // Legacy config
             grailsApplication.config.grails?.plugin?.segmentio
         }
+    }
+
+    private def getDefaultOptions() {
+        config?.options ?: [:]
     }
 
     private boolean isEnabled() {
