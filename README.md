@@ -104,7 +104,7 @@ segmentioService.identify(
     'bob@bob.com', [gender: 'male'],
     new DateTime(2012, 3, 26, 12, 0, 0, 0),
     [
-        providers: [
+        integrations: [
             'All': false,
             'Mixpanel': true,
             'KISSmetrics': true
@@ -137,7 +137,7 @@ segmentioService.track(
     [plan: 'Pro', amount: 99.95],
     new DateTime(2012, 3, 26, 12, 0, 0, 0),
     [
-        providers: [
+        integrations: [
             'All': false,
             'Mixpanel': true,
             'KISSmetrics': true
@@ -207,7 +207,7 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
 <!-- Identify current user with context -->
 <segmentio:identify
     userId="bob@bob.com"
-    context="${[providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
+    context="${[integrations: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
 
 <!-- Track an event -->
 <segmentio:track event="Signed Up"/>
@@ -218,7 +218,7 @@ Once initialized, you can use [Segment.io Javascript Library](https://segment.io
 <!-- Track an event with context -->
 <segmentio:track
     event="Signed Up"
-    context="${[providers: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
+    context="${[integrations: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
 
 <!-- Track a link click -->
 <segmentio:trackLink

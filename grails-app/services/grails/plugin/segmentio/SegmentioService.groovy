@@ -90,7 +90,7 @@ class SegmentioService implements InitializingBean {
                     userId.toString(),
                     groupId.toString(),
                     traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options)
+                    buildOptions(options ?: defaultOptions)
             )
         }
     }
@@ -122,7 +122,7 @@ class SegmentioService implements InitializingBean {
             analytics.identify(
                     userId.toString(),
                     traits ? new Traits(*traits.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
+                    buildOptions(options ?: defaultOptions, timestamp)
             )
         }
     }
@@ -164,7 +164,7 @@ class SegmentioService implements InitializingBean {
                     name,
                     category,
                     properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
+                    buildOptions(options ?: defaultOptions, timestamp)
             )
         }
     }
@@ -207,7 +207,7 @@ class SegmentioService implements InitializingBean {
                     name,
                     category,
                     properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
+                    buildOptions(options ?: defaultOptions, timestamp)
             )
         }
     }
@@ -244,7 +244,7 @@ class SegmentioService implements InitializingBean {
                     userId.toString(),
                     event,
                     properties ? new Props(*properties.collect { k, v -> [k, v] }.flatten()) : null,
-                    buildOptions(options, timestamp)
+                    buildOptions(options ?: defaultOptions, timestamp)
             )
         }
     }
@@ -260,7 +260,11 @@ class SegmentioService implements InitializingBean {
             sioOptions.anonymousId = options.anonymousId
         }
         if (options.providers) {
-            options.providers.each { String integration, Boolean enabled ->
+            // Legacy support
+            options.integrations = options.providers
+        }
+        if (options.integrations) {
+            options.integrations.each { String integration, Boolean enabled ->
                 sioOptions.setIntegration(integration, enabled)
             }
         }
@@ -285,6 +289,10 @@ class SegmentioService implements InitializingBean {
 
     private def getConfig() {
         grailsApplication.config.grails?.plugin?.segmentio
+    }
+
+    private def getDefaultOptions() {
+        config?.options ?: [:]
     }
 
     private boolean isEnabled() {
