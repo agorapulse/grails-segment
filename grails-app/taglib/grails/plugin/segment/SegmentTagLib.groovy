@@ -10,7 +10,7 @@ class SegmentTagLib {
      * Initialize Segment.io
      * @attr enabled JS loading (default to config value)
      * @attr pageTracked Track page view (default to true)
-     * @attr providers A dictionary of the analytics providers you want to enable. Each provider takes a string of your API key for the service. Or, if you want to supply additional settings, you can also pass a dictionary of provider-specific settings as well. You only need to call this method if you're using your own copy of analytics.js on it's own.
+     * @attr integrations A dictionary of the analytics integrations you want to enable. Each integration takes a string of your API key for the service. Or, if you want to supply additional settings, you can also pass a dictionary of provider-specific settings as well. You only need to call this method if you're using your own copy of analytics.js on it's own.
      */
     def initJS = { attrs ->
         if (enabled || attrs.enabled) {
@@ -45,7 +45,7 @@ class SegmentTagLib {
      */
     def identify = { attrs ->
         assert attrs.userId
-        if (!attrs.context) attrs.context = [:]
+        if (!attrs.context) attrs.context = defaultContext
         if (!attrs.traits) attrs.traits = [:]
         if (enabled) {
             if (intercomSecureModeEnabled) {
@@ -85,7 +85,7 @@ class SegmentTagLib {
     def page = { attrs ->
         if (!attrs.category) attrs.category = ''
         if (!attrs.name) attrs.name = ''
-        if (!attrs.context) attrs.context = [:]
+        if (!attrs.context) attrs.context = defaultContext
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/page', model: attrs, plugin: 'segment')
@@ -113,7 +113,7 @@ class SegmentTagLib {
      */
     def track = { attrs ->
         assert attrs.event
-        if (!attrs.context) attrs.context = [:]
+        if (!attrs.context) attrs.context = defaultContext
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/track', model: attrs, plugin: 'segment')
@@ -131,7 +131,7 @@ class SegmentTagLib {
     def trackForm = { attrs ->
         assert attrs.form
         assert attrs.event
-        if (!attrs.context) attrs.context = [:]
+        if (!attrs.context) attrs.context = defaultContext
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/trackForm', model: attrs, plugin: 'segment')
@@ -149,7 +149,7 @@ class SegmentTagLib {
     def trackLink = { attrs ->
         assert attrs.link
         assert attrs.event
-        if (!attrs.context) attrs.context = [:]
+        if (!attrs.context) attrs.context = defaultContext
         if (!attrs.properties) attrs.properties = [:]
         if (enabled) {
             out << render(template: '/tags/trackLink', model: attrs, plugin: 'segment')
@@ -165,6 +165,10 @@ class SegmentTagLib {
             // Legacy config
             grailsApplication.config.grails?.plugin?.segmentio
         }
+    }
+
+    private def getDefaultContext() {
+        config?.options ?: [:]
     }
 
     private boolean isEnabled() {
