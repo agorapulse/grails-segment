@@ -1,7 +1,7 @@
 Segment Grails Plugin
 =====================
 
-[![Build Status](https://travis-ci.org/agorapulse/grails-segmentio.png)](https://travis-ci.org/agorapulse/grails-segmentio)
+[![Build Status](https://travis-ci.org/agorapulse/grails-segment.png)](https://travis-ci.org/agorapulse/grails-segment)
 [![Download](https://api.bintray.com/packages/agorapulse/plugins/segment/images/download.svg)](https://bintray.com/agorapulse/plugins/segment/_latestVersion)
 
 # Introduction
@@ -25,7 +25,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:segment:2.0.5"
+    compile "org.grails.plugins:segment:2.0.6"
 }
 ```
 
@@ -84,7 +84,7 @@ segmentService.identify(
     'bob@bob.com', [gender: 'male'],
     new DateTime(2012, 3, 26, 12, 0, 0, 0),
     [
-        providers: [
+        integrations: [
             'All': false,
             'Mixpanel': true,
             'KISSmetrics': true
@@ -117,7 +117,7 @@ segmentService.track(
     [plan: 'Pro', amount: 99.95],
     new DateTime(2012, 3, 26, 12, 0, 0, 0),
     [
-        providers: [
+        integrations: [
             'All': false,
             'Mixpanel': true,
             'KISSmetrics': true
@@ -187,7 +187,7 @@ Once initialized, you can use [Segment Analytics.js Library](https://segment.com
 <!-- Identify current user with context -->
 <segment:identify
     userId="bob@bob.com"
-    context="${[providers: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
+    context="${[integrations: ['All': false, 'Mixpanel': true, 'KISSmetrics': true]]}"/>
 
 <!-- Track an event -->
 <segment:track event="Signed Up"/>
@@ -198,7 +198,7 @@ Once initialized, you can use [Segment Analytics.js Library](https://segment.com
 <!-- Track an event with context -->
 <segment:track
     event="Signed Up"
-    context="${[providers: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
+    context="${[integrations: ['All': false, 'Google Analytics': true, 'Customer.io': true]]}"/>
 
 <!-- Track a link click -->
 <segment:trackLink
@@ -227,4 +227,4 @@ Once initialized, you can use [Segment Analytics.js Library](https://segment.com
 
 # Bugs
 
-To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-segmentio/issues) section on GitHub.
+To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-segment/issues) section on GitHub.
