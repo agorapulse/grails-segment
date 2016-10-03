@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':segmentio:1.0.7'
+				runtime ':segmentio:1.0.7.4'
 		}
 }
 ```
@@ -250,6 +250,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2016-10-01 **v1.0.7.4** : new default `options` can be set in config (done on client side)
 * 2016-10-01 **v1.0.7.3** : new default `options` can be set in config
 * 2016-07-05 **v1.0.7.2** : new `active` options context param added
 * 2015-07-27 **v1.0.7.1** : new `serverApiKey`conf param added
