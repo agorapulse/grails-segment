@@ -52,7 +52,7 @@ dependencies {
 
 grailsPublish {
     userOrg = 'agorapulse'
-    githubSlug = 'agorapulse/grails-segmentio'
+    githubSlug = 'agorapulse/grails-segment'
     license {
         name = 'Apache-2.0'
     }
