@@ -50,6 +50,10 @@ dependencies {
     compile 'com.segment.analytics.java:analytics:2.0.0-RC7'
 }
 
+bootRun {
+    jvmArgs = ['-Dspring.output.ansi.enabled=always']
+}
+
 grailsPublish {
     userOrg = 'agorapulse'
     githubSlug = 'agorapulse/grails-segment'

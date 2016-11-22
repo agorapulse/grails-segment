@@ -1,23 +1,21 @@
-# GRAILS files
-/web-app/WEB-INF
-/target
-/target-eclipse
+# Grails
 
-# GRADLE files
+application-development.yml
+application-test.yml
+
+# Gradle
+
 build/
 .gradle/
 
-# IDE files
-.classpath
-.idea/
-.project
-.settings
-/*.launch
-/*.tmproj
+# IDEA
 
-*.log
-*.zip
 *.iml
-/out
-plugin.xml
-*.sha1
+*.ipr
+*.iws
+.idea/
+.asscache
+
+# PAW
+
+*.paw
