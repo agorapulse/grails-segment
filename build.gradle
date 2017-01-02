@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.grails.org/grails/core" }
+    }
+    dependencies {
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+    }
+}
+
+version "2.0.7"
+group "org.grails.plugins"
+
+apply plugin:"eclipse"
+apply plugin:"idea"
+apply plugin:"org.grails.grails-plugin"
+apply plugin:"org.grails.grails-plugin-publish"
+apply plugin:"org.grails.grails-gsp"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.grails.org/grails/core" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    compile "org.grails:grails-dependencies"
+    compile "org.grails:grails-web-boot"
+    console "org.grails:grails-console"
+    profile "org.grails.profiles:web-plugin"
+    provided "org.grails:grails-plugin-services"
+    provided "org.grails:grails-plugin-domain-class"
+    testCompile "org.grails:grails-plugin-testing"
+
+    // Latest Joda Time
+    compile 'joda-time:joda-time:2.9.4'
+    // Latest Segment analytics java client
+    compile 'com.segment.analytics.java:analytics:2.0.0-RC7'
+}
+
+bootRun {
+    jvmArgs = ['-Dspring.output.ansi.enabled=always']
+}
+
+grailsPublish {
+    userOrg = 'agorapulse'
+    githubSlug = 'agorapulse/grails-segment'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "segment"
+    desc = "Grails Segment plugin"
+    developers = [benorama:"Benoit Hediard"]
+    portalUser = ""
+    portalPassword = ""
+}

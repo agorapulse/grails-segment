@@ -1,11 +1,19 @@
-package grails.plugin.segmentio
+package grails.plugin.segment
 
 import grails.test.mixin.TestFor
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(SegmentioTagLib)
-class SegmentioTagLibSpec extends Specification {
+@TestFor(SegmentTagLib)
+class SegmentTagLibSpec extends Specification {
+
+    static doWithConfig(c) {
+        c.grails =  [
+                plugin: [
+                        segmentio: [:]
+                ]
+        ]
+    }
 
     def "should be disabled by default" () {
         !tagLib.enabled
@@ -57,13 +65,7 @@ class SegmentioTagLibSpec extends Specification {
     // PRIVATE
 
     private buildConfig(Map config) {
-        tagLib.grailsApplication.config = [
-                grails: [
-                        plugin: [
-                                segmentio: config
-                        ]
-                ]
-        ]
+        grailsApplication.config.grails.plugin.segmentio =  config
     }
 
     private setEnvironment(environment) {

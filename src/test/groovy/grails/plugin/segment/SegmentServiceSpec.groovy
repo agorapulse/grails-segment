@@ -1,11 +1,19 @@
-package grails.plugin.segmentio
+package grails.plugin.segment
 
 import grails.test.mixin.TestFor
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(SegmentioService)
-class SegmentioServiceSpec extends Specification {
+@TestFor(SegmentService)
+class SegmentServiceSpec extends Specification {
+
+    static doWithConfig(c) {
+        c.grails =  [
+                plugin: [
+                        segmentio: [:]
+                ]
+        ]
+    }
 
     def "should be disabled by default" () {
         !service.enabled
@@ -57,13 +65,7 @@ class SegmentioServiceSpec extends Specification {
     // PRIVATE
 
     private buildConfig(Map config) {
-        service.grailsApplication.config = [
-                grails: [
-                        plugin: [
-                                segmentio: config
-                        ]
-                ]
-        ]
+        grailsApplication.config.grails.plugin.segmentio =  config
     }
 
     private setEnvironment(environment) {
