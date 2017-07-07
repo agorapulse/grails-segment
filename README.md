@@ -21,7 +21,7 @@ Declare the plugin dependency in the _build.gradle_ file, as shown here:
 ```groovy
 dependencies {
     ...
-    compile "org.grails.plugins:segment:2.0.7"
+    compile "org.grails.plugins:segment:2.0.8"
     ...
 }
 ```
