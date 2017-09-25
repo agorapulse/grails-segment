@@ -238,7 +238,7 @@ class SegmentService implements InitializingBean {
                 builder.enableIntegration(key, enabled)
             }
         }
-        if (options.ip || options.language || options.userAgent) {
+        if (options.ip || options.language || options.userAgent || options.Intercom) {
             Map context = [:]
             if (options.ip) {
                 context += [ip: options.ip]
@@ -248,6 +248,9 @@ class SegmentService implements InitializingBean {
             }
             if (options.userAgent) {
                 context += [userAgent: options.userAgent]
+            }
+            if (options.Intercom) {
+                context += [Intercom: options.Intercom]
             }
             builder.context(context)
         }
