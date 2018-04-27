@@ -47,7 +47,7 @@ dependencies {
     // Latest Joda Time
     compile 'joda-time:joda-time:2.9.9'
     // Latest Segment analytics java client
-    compile 'com.segment.analytics.java:analytics:2.0.0'
+    compile 'com.segment.analytics.java:analytics:2.1.1'
 }
 
 bootRun {
