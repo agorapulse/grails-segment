@@ -3,9 +3,11 @@ package grails.plugin.segment
 import com.segment.analytics.Analytics
 import com.segment.analytics.messages.*
 import grails.util.Environment
+import groovy.util.logging.Slf4j
 import org.joda.time.DateTime
 import org.springframework.beans.factory.InitializingBean
 
+@Slf4j
 class SegmentService implements InitializingBean {
 
     def grailsApplication
