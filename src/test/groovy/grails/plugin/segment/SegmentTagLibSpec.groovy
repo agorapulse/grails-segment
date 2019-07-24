@@ -1,11 +1,10 @@
 package grails.plugin.segment
 
-import grails.test.mixin.TestFor
+import grails.testing.web.taglib.TagLibUnitTest
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(SegmentTagLib)
-class SegmentTagLibSpec extends Specification {
+class SegmentTagLibSpec extends Specification implements TagLibUnitTest<SegmentTagLib> {
 
     static doWithConfig(c) {
         c.grails =  [

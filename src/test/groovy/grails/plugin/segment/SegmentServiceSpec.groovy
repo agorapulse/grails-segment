@@ -1,11 +1,10 @@
 package grails.plugin.segment
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(SegmentService)
-class SegmentServiceSpec extends Specification {
+class SegmentServiceSpec extends Specification implements ServiceUnitTest<SegmentService> {
 
     static doWithConfig(c) {
         c.grails =  [
