@@ -6,6 +6,11 @@ Segment Grails Plugin
 
 # Introduction
 
+IMPORTANT: Project retirement
+-------------------------------
+
+**This project is retired. As Micronaut become core of the Grails starting at Grails 4, please, use [Micronaut Segment](https://agorapulse.github.io/micronaut-segment) instead.**
+
 The **Segment Plugin** allows you to integrate [Segment](http://segment.com) in your [Grails](http://grails.org) application.
 
 Segment lets you send your analytics data to any service you want, without you having to integrate with each one individually.
